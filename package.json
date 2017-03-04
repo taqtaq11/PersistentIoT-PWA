@@ -1,5 +1,5 @@
 {
-  "name": "persistent-io-t-pwa",
+  "name": "persistent-iot-pwa",
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
@@ -9,20 +9,29 @@
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor"
+    "e2e": "protractor",
+    "lint_staged": "echo 'no linters used'"
   },
   "private": true,
   "dependencies": {
+    "@angular/app-shell": "^0.1.0",
     "@angular/common": "^2.3.1",
     "@angular/compiler": "^2.3.1",
     "@angular/core": "^2.3.1",
     "@angular/forms": "^2.3.1",
     "@angular/http": "^2.3.1",
+    "@angular/material": "^2.0.0-beta.1",
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
+    "@angular/service-worker": "^0.7.1",
+    "@manekinekko/angular-web-bluetooth": "*",
+    "@ngrx/core": "*",
+    "@ngrx/router-store": "*",
+    "@ngrx/store": "*",
     "core-js": "^2.4.1",
-    "rxjs": "^5.0.1",
+    "reselect": "^2.5.4",
+    "rxjs": "5.0.2",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
   },
@@ -42,6 +51,8 @@
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.0.2",
-    "typescript": "~2.0.3"
+    "typescript": "~2.0.3",
+    "material-design-icons": "^3.0.1",
+    "validate-commit-msg": "^2.11.1"
   }
 }
