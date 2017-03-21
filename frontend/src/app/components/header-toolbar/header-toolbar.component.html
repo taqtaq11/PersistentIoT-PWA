@@ -1,0 +1,6 @@
+<md-toolbar class="header-toolbar" color="primary">
+  <button md-icon-button (click)="onMenuButtonClicked.emit()">
+    <md-icon>menu</md-icon>
+  </button>
+  <span>{{title | async}}</span>
+</md-toolbar>

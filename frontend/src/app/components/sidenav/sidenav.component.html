@@ -1,0 +1,8 @@
+<md-sidenav-container class="piot-sidenav-container">
+  <md-sidenav #sidenav [opened]="opened" (close)="onClosed()" class="piot-sidenav">
+    <md-nav-list>
+      <ng-content select="[menu-item]"></ng-content>
+    </md-nav-list>
+  </md-sidenav>
+  <ng-content select="[main-content]"></ng-content>
+</md-sidenav-container>

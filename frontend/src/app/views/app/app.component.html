@@ -1,0 +1,42 @@
+<app-header-toolbar title="" (onMenuButtonClicked)="toggleSidenav()"></app-header-toolbar>
+
+<app-sidenav (onClosedInternally)="closeSidenav()"
+             [opened]="showSidenav$ | async"
+             >
+    <app-nav-item (onItemClicked)="toggleSidenav()"
+                  menu-item
+                  link="/devices-scanner"
+                  icon="bluetooth_searching"
+                  name="Devices scanner"
+                  >
+    </app-nav-item>
+    <app-nav-item (onItemClicked)="toggleSidenav()"
+                  menu-item
+                  link="/hubs"
+                  icon="phonelink_ring"
+                  name="Hubs"
+                  >
+    </app-nav-item>
+    <app-nav-item (onItemClicked)="toggleSidenav()"
+                  menu-item
+                  link="/devices-templates"
+                  icon="devices_other"
+                  name="Devices templates"
+                  >
+    </app-nav-item>
+    <app-nav-item (onItemClicked)="toggleSidenav()"
+                  menu-item
+                  link="/controls-templates"
+                  icon="widgets"
+                  name="Controls templates"
+                  >
+    </app-nav-item>
+    <app-nav-item (onItemClicked)="toggleSidenav()"
+                  menu-item
+                  link="/user-profile"
+                  icon="person"
+                  name="User profile"
+                  >
+    </app-nav-item>
+  <router-outlet main-content></router-outlet>
+</app-sidenav>

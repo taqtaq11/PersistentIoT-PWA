@@ -1,0 +1,15 @@
+@import '~@angular/material/core/theming/all-theme';
+
+@include md-core();
+
+$persistent-iot-indigo-pink-primary: md-palette($md-indigo);
+$persistent-iot-indigo-pink-accent:  md-palette($md-pink);
+$persistent-iot-indigo-pink-warn:    md-palette($md-red);
+
+$persistent-iot-indigo-pink-theme: md-light-theme(
+  $persistent-iot-indigo-pink-primary,
+  $persistent-iot-indigo-pink-accent,
+  $persistent-iot-indigo-pink-warn
+);
+
+@include angular-material-theme($persistent-iot-indigo-pink-theme);
