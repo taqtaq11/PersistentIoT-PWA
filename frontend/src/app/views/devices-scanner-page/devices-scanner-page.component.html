@@ -1,4 +1,9 @@
 <div class="devices-scanner-page">
+  <md-list>
+    <md-list-item *ngFor="let device of (devices$ | async)">
+      {{device.id}} - {{device.name}}
+    </md-list-item>
+  </md-list>
   <button class="primary-action-button"
           md-fab
           color="primary"

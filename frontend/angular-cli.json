@@ -21,7 +21,8 @@
         "./app/styles/theme.scss",
         "styles.less"
       ],
-      "scripts": [],
+      "scripts": [
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

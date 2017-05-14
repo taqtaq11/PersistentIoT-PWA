@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderToolbarComponent implements OnInit {
 
-  @Input() title: Observable<String>;
+  @Input() title: String;
   @Output() onMenuButtonClicked = new EventEmitter();
 
   constructor() { }

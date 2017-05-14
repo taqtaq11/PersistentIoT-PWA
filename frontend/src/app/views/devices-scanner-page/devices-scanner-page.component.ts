@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BatteryLevelTestService } from '../../services/battery-level-test.service';
+
+import {Observable} from "rxjs";
+import {Store} from "@ngrx/store";
+
+import {Device} from "../../models/device";
+
+import { DevicesScannerService } from '../../services/devices-scanner.service';
+import * as fromRoot from '../../reducers/app.reducer';
 
 @Component({
   selector: 'app-devices-scanner-page',
@@ -8,19 +15,34 @@ import { BatteryLevelTestService } from '../../services/battery-level-test.servi
 })
 export class DevicesScannerPageComponent implements OnInit {
 
-  private batteryLevelTestService: BatteryLevelTestService;
+  private devicesScannerService: DevicesScannerService;
 
-  constructor(batteryLevelTestService: BatteryLevelTestService) {
-    this.batteryLevelTestService = batteryLevelTestService;
+  devices$: Observable<Device[]>;
+
+  constructor(store: Store<fromRoot.State>,
+              devicesScannerService: DevicesScannerService) {
+
+    this.devicesScannerService = devicesScannerService;
+
+    this.devices$ = store.select(fromRoot.getConnectedDevices);
   }
 
   ngOnInit() {
-
+    // this.installWorker();
   }
 
   clickHandler($event) {
-    this.batteryLevelTestService
-      .getDevice();
+    this.devicesScannerService.scanDevice();
   }
+
+  // installWorker(): void {
+  //       navigator['serviceWorker'].register('/service-worker.js')
+  //           .then(reg => {
+  //               alert(reg);
+  //           })
+  //           .catch(err => {
+  //               alert(err);
+  //           });
+  //   }
 
 }

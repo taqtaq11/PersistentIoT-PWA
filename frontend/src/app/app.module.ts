@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { WebBluetoothModule } from '@manekinekko/angular-web-bluetooth';
 import { StoreModule } from '@ngrx/store';
 import { RouterStoreModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './views/app/app.component';
 import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
@@ -15,7 +16,11 @@ import { DevicesScannerPageComponent } from './views/devices-scanner-page/device
 import { HubsPageComponent } from './views/hubs-page/hubs-page.component';
 import { NotFoundPageComponent } from './views/not-found-page/not-found-page.component';
 
-import { BatteryLevelTestService } from './services/battery-level-test.service'
+import {DevicesScannerService} from "./services/devices-scanner.service";
+import { BLEScannerService } from './services/bluetooth/ble-scanner.service';
+import { BluetoothCoreExtended } from './services/bluetooth/ble-scanner.utils';
+
+import { DeviceScannerEffects } from './effects/devices-scanner.effect';
 
 import { routes } from './routes';
 import { reducer } from './reducers/app.reducer';
@@ -41,9 +46,14 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
     RouterModule.forRoot(routes, { useHash: true }),
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
-    WebBluetoothModule.forRoot()
+    WebBluetoothModule.forRoot(),
+    EffectsModule.run(DeviceScannerEffects)
   ],
-  providers: [ BatteryLevelTestService ],
+  providers: [
+    DevicesScannerService,
+    BLEScannerService,
+    BluetoothCoreExtended
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
