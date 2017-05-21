@@ -1,13 +1,19 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { WebBluetoothModule } from '@manekinekko/angular-web-bluetooth';
 import { StoreModule } from '@ngrx/store';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
+
+import { LocalStorageModule } from 'angular-2-local-storage';
+
+import { MdButtonModule, MdSidenavModule, MdCheckboxModule,
+         MdSlideToggleModule, MdIconModule, MdListModule,
+         MdToolbarModule, MdTabsModule } from '@angular/material';
 
 import { AppComponent } from './views/app/app.component';
 import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
@@ -39,14 +45,28 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
     NavItemComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    LocalStorageModule.withConfig({
+        prefix: 'piot',
+        storageType: 'localStorage'
+    }),
+    MdButtonModule,
+    MdSidenavModule,
+    MdCheckboxModule,
+    MdSlideToggleModule,
+    MdIconModule,
+    MdListModule,
+    MdToolbarModule,
+    MdTabsModule,
     RouterModule.forRoot(routes, { useHash: true }),
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
-    WebBluetoothModule.forRoot(),
+    WebBluetoothModule.forRoot({
+      enableTracing: false
+    }),
     EffectsModule.run(DeviceScannerEffects)
   ],
   providers: [

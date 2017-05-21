@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import {Observable} from "rxjs";
-import {Store} from "@ngrx/store";
 
 import {Device} from "../../models/device";
+import {Hub} from "../../models/hub";
 
 import { DevicesScannerService } from '../../services/devices-scanner.service';
-import * as fromRoot from '../../reducers/app.reducer';
 
 @Component({
   selector: 'app-devices-scanner-page',
@@ -17,32 +16,21 @@ export class DevicesScannerPageComponent implements OnInit {
 
   private devicesScannerService: DevicesScannerService;
 
-  devices$: Observable<Device[]>;
+  managingHubs$: Observable<Hub[]>;
 
-  constructor(store: Store<fromRoot.State>,
-              devicesScannerService: DevicesScannerService) {
+  constructor(devicesScannerService: DevicesScannerService) {
 
     this.devicesScannerService = devicesScannerService;
 
-    this.devices$ = store.select(fromRoot.getConnectedDevices);
+    this.devicesScannerService.selectLocalHub();
+    this.managingHubs$ = this.devicesScannerService.getManagingHubs();
   }
 
   ngOnInit() {
-    // this.installWorker();
   }
 
   clickHandler($event) {
     this.devicesScannerService.scanDevice();
   }
-
-  // installWorker(): void {
-  //       navigator['serviceWorker'].register('/service-worker.js')
-  //           .then(reg => {
-  //               alert(reg);
-  //           })
-  //           .catch(err => {
-  //               alert(err);
-  //           });
-  //   }
 
 }

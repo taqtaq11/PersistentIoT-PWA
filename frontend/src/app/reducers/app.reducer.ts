@@ -18,10 +18,14 @@ const reducers = {
   devicesScanner: fromDevicesScanner.reducer
 };
 
-export const reducer = combineReducers(reducers);
+const mainReducer = combineReducers(reducers);
+
+export function reducer(state: any, action: any) {
+    return mainReducer(state, action);
+}
 
 export const getLayoutState = (state: State) => state.layout;
 export const getDevicesScannerState = (state: State) => state.devicesScanner;
 
 export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav);
-export const getConnectedDevices = createSelector(getDevicesScannerState, fromDevicesScanner.getConnectedDevices);
+export const getManagingHubs = createSelector(getDevicesScannerState, fromDevicesScanner.getManagingHubs);

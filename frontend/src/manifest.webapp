@@ -4,7 +4,7 @@
   "display": "standalone",
   "icons": [{
     "src": "\/assets\/favicons\/favicon-32x32.png",
-    "sizes": "144x144",
+    "sizes": "32x32",
     "type": "image\/png"
   }, {
     "src": "\/assets\/favicons\/android-chrome-192x192.png",

@@ -91,7 +91,7 @@ export class BLEScannerService {
     })
     .map(service => {
       return service.device as BluetoothDevice;
-    });
+    }) as any as Observable<BluetoothDevice>;
   }
 
   // .mergeMap((gatt: BluetoothRemoteGATTServer) => {

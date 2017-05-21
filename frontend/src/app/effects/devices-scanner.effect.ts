@@ -15,11 +15,22 @@ import * as devicesScannerActionInfo from '../actions/devices-scanner.action';
 
 import {Device} from "../models/device";
 import { BLEScannerService } from '../services/bluetooth/ble-scanner.service';
+import {HubStorageManager} from "../services/local/hub-storage-manager.service";
 
 @Injectable()
 export class DeviceScannerEffects {
-  constructor(private actions$: Actions, private bleScanner: BLEScannerService) { }
+  constructor(private actions$: Actions,
+              private bleScanner: BLEScannerService,
+              private hubStorageManager: HubStorageManager) { }
 
+  @Effect()
+  selectLocalHub$: Observable<Action> = this.actions$
+    .ofType(devicesScannerActionInfo.ActionTypes.SELECT_LOCAL_HUB)
+    .switchMap((action: devicesScannerActionInfo.LocalHubSelectedAction) => {
+      return this.hubStorageManager.getLocalHub()
+        .map(localHub => new devicesScannerActionInfo.LocalHubSelectedAction(localHub))
+        .catch(() => of(new devicesScannerActionInfo.LocalHubSelectedAction(null)));
+    });
 
   @Effect()
   scanDevices$: Observable<Action> = this.actions$

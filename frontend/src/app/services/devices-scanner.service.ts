@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { State } from '../reducers/app.reducer';
+import * as fromRoot from '../reducers/app.reducer';
+import { SelectLocalHubAction } from '../actions/devices-scanner.action';
 import { ScanDevicesAction } from '../actions/devices-scanner.action';
 
 @Injectable()
 export class DevicesScannerService {
 
-  private store: Store<State>;
+  private store: Store<fromRoot.State>;
 
-  constructor(store: Store<State>) {
+  constructor(store: Store<fromRoot.State>) {
     this.store = store;
   }
 
-  scanDevice() {
+  public selectLocalHub() {
+    this.store.dispatch(new SelectLocalHubAction());
+  }
+
+  public scanDevice() {
     this.store.dispatch(new ScanDevicesAction());
+  }
+
+  public getManagingHubs() {
+    return this.store.select(fromRoot.getManagingHubs);
   }
 }

@@ -1,9 +1,18 @@
 <div class="devices-scanner-page">
-  <md-list>
-    <md-list-item *ngFor="let device of (devices$ | async)">
-      {{device.id}} - {{device.name}}
-    </md-list-item>
-  </md-list>
+  <md-tab-group>
+    <md-tab *ngFor="let hub of (managingHubs$ | async)">
+      <ng-template md-tab-label>
+        {{hub.name}}
+      </ng-template>
+
+      <md-list>
+        <md-list-item *ngFor="let device of hub.connectedDevices">
+          {{device.id}} - {{device.name}}
+        </md-list-item>
+      </md-list>
+    </md-tab>
+  </md-tab-group>
+
   <button class="primary-action-button"
           md-fab
           color="primary"
