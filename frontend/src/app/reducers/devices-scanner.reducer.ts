@@ -14,10 +14,20 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: devicesScanner.Actions): State {
   switch (action.type) {
     case devicesScanner.ActionTypes.LOCAL_HUB_SELECTED: {
-      return {
-        managingHubs: [(action as devicesScanner.LocalHubSelectedAction).payload]
-                      .concat(state.managingHubs)
-      };
+      let localHubArray =
+        state.managingHubs.filter((hub) => {
+          return hub.isLocal === true;
+        });
+
+      if (localHubArray.length > 0) {
+        return state;
+      }
+      else {
+        return {
+          managingHubs: [(action as devicesScanner.LocalHubSelectedAction).payload]
+                        .concat(state.managingHubs)
+        };
+      }
     }
 
     case devicesScanner.ActionTypes.DEVICES_SCAN_COMPLETE: {

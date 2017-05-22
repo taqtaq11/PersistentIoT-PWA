@@ -1,6 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { COMPILER_PROVIDERS } from '@angular/compiler';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -25,6 +26,8 @@ import { NotFoundPageComponent } from './views/not-found-page/not-found-page.com
 import {DevicesScannerService} from "./services/devices-scanner.service";
 import { BLEScannerService } from './services/bluetooth/ble-scanner.service';
 import { BluetoothCoreExtended } from './services/bluetooth/ble-scanner.utils';
+import { StorageManager } from './services/local/storage-manager.service';
+import { HubStorageManager } from './services/local/hub-storage-manager.service';
 
 import { DeviceScannerEffects } from './effects/devices-scanner.effect';
 
@@ -32,6 +35,8 @@ import { routes } from './routes';
 import { reducer } from './reducers/app.reducer';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavItemComponent } from './components/nav-item/nav-item.component';
+import { DeviceControlPageComponent } from './views/device-control-page/device-control-page.component';
+import { DynamicControlComponent } from './components/dynamic-control/dynamic-control.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +47,9 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
     HubsPageComponent,
     NotFoundPageComponent,
     SidenavComponent,
-    NavItemComponent
+    NavItemComponent,
+    DeviceControlPageComponent,
+    DynamicControlComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -70,9 +77,12 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
     EffectsModule.run(DeviceScannerEffects)
   ],
   providers: [
+    COMPILER_PROVIDERS,
     DevicesScannerService,
     BLEScannerService,
-    BluetoothCoreExtended
+    BluetoothCoreExtended,
+    StorageManager,
+    HubStorageManager
   ],
   bootstrap: [AppComponent]
 })

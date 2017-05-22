@@ -6,8 +6,16 @@
       </ng-template>
 
       <md-list>
-        <md-list-item *ngFor="let device of hub.connectedDevices">
-          {{device.id}} - {{device.name}}
+        <md-list-item *ngFor="let device of hub.connectedDevices" layout="row">
+          <a (click)="deviceControlClickHandler($event)" [routerLink]="['/device-control']" color="accent">
+            {{device.name}}
+          </a>
+          <a (click)="deviceOptionsClickHandler($event)" [routerLink]="['/device-options']" color="accent">
+            <md-icon class="nav-item__icon" color="primary">settings</md-icon>
+          </a>
+          <a (click)="disconnectDeviceClickHandler($event)" color="accent">
+            <md-icon class="nav-item__icon" color="primary">clear</md-icon>
+          </a>
         </md-list-item>
       </md-list>
     </md-tab>
@@ -16,7 +24,7 @@
   <button class="primary-action-button"
           md-fab
           color="primary"
-          (click)="clickHandler($event)"
+          (click)="scanDevicesClickHandler($event)"
           >
     <md-icon color="secondary">bluetooth_searching</md-icon>
   </button>

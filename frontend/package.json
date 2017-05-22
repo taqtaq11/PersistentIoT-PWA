@@ -13,7 +13,8 @@
     "lint_staged": "echo 'no linters used'",
     "precache": "sw-precache --verbose --config=sw-precache-config.js",
     "static-serve": "cd dist && http-server -S -C /home/taqtaq11/certs/certificate.pem -K /home/taqtaq11/certs/private.pem",
-    "swss": "sudo rm -rf dist && sudo ng build --prod --aot && sudo npm run precache && sudo npm run static-serve"
+    "swss": "sudo rm -rf dist && sudo ng build && sudo npm run precache && sudo npm run static-serve",
+    "swss-prod": "sudo rm -rf dist && sudo ng build --prod --aot && sudo npm run precache && sudo npm run static-serve"
   },
   "private": true,
   "dependencies": {

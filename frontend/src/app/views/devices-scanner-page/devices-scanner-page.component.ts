@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import {Observable} from "rxjs";
 
@@ -13,15 +13,12 @@ import { DevicesScannerService } from '../../services/devices-scanner.service';
   styleUrls: ['./devices-scanner-page.component.less']
 })
 export class DevicesScannerPageComponent implements OnInit {
-
   private devicesScannerService: DevicesScannerService;
 
   managingHubs$: Observable<Hub[]>;
 
   constructor(devicesScannerService: DevicesScannerService) {
-
     this.devicesScannerService = devicesScannerService;
-
     this.devicesScannerService.selectLocalHub();
     this.managingHubs$ = this.devicesScannerService.getManagingHubs();
   }
@@ -29,8 +26,20 @@ export class DevicesScannerPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  clickHandler($event) {
+  scanDevicesClickHandler($event) {
     this.devicesScannerService.scanDevice();
+  }
+
+  deviceControlClickHandler($event) {
+    console.log('control clicked');
+  }
+
+  deviceOptionsClickHandler($event) {
+    console.log('options clicked');
+  }
+
+  disconnectDeviceClickHandler($event) {
+    console.log('disconnect clicked');
   }
 
 }
